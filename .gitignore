@@ -1,0 +1,11 @@
+# OS Metadata
+.DS_Store
+Thumbs.db
+
+# Secrets (Crucial if you add payments/backend later)
+.env
+*.log
+
+# Design assets you don't want live
+*.psd
+*.ai
