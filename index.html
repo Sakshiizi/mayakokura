@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Romantic Love Page Templates</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Dancing+Script:wght@400;700&amp;family=Quicksand:wght@300;400;600&amp;family=Cinzel:wght@400;700&amp;display=swap" rel="stylesheet">
+  <style>
+  html, body { height: 100%; margin: 0; }
+
+  /* Floating hearts for cute theme */
+  @keyframes floatHeart {
+    0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.7; }
+    50% { transform: translateY(-40px) rotate(15deg) scale(1.1); opacity: 1; }
+    100% { transform: translateY(-80px) rotate(-10deg) scale(0.9); opacity: 0; }
+  }
+  .float-heart {
+    animation: floatHeart 4s ease-in-out infinite;
+  }
+
+  /* Sparkle for dreamy theme */
+  @keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+  .sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  /* Glow pulse for dark theme */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(180, 30, 30, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(180, 30, 30, 0.6); }
+  }
+  .glow-pulse {
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+
+  /* Gold shimmer for luxury theme */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .gold-shimmer {
+    background: linear-gradient(90deg, #c9a84c, #f5e6a3, #c9a84c, #f5e6a3, #c9a84c);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Fade in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    animation: fadeUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  .fade-up-d1 { animation-delay: 0.1s; }
+  .fade-up-d2 { animation-delay: 0.3s; }
+  .fade-up-d3 { animation-delay: 0.5s; }
+  .fade-up-d4 { animation-delay: 0.7s; }
+  .fade-up-d5 { animation-delay: 0.9s; }
+
+  /* Cloud float for dreamy */
+  @keyframes cloudDrift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(20px); }
+  }
+  .cloud-drift {
+    animation: cloudDrift 8s ease-in-out infinite;
+  }
+
+  .template-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .template-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .placeholder-zone {
+    border: 2px dashed;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .placeholder-zone:hover {
+    transform: scale(1.02);
+  }
+  .placeholder-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .download-btn {
+    transition: all 0.3s;
+  }
+  .download-btn:hover {
+    transform: translateY(-2px);
+  }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="w-full h-full overflow-auto" style="background: #0f0f0f;"><!-- Theme Selector Bar -->
+   <nav id="theme-nav" class="sticky top-0 z-50 w-full" style="background: rgba(15,15,15,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08);">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-3">
+     <h1 id="nav-title" class="text-white text-lg font-semibold" style="font-family: 'Playfair Display', serif;">💌 Love Page Templates</h1>
+     <div class="flex gap-2 flex-wrap"><button onclick="switchTheme('cute')" id="btn-cute" class="theme-btn px-4 py-2 rounded-full text-sm font-medium transition-all" style="background: #ff8fab; color: #fff;">🍑 Peachy</button> <button onclick="switchTheme('luxury')" id="btn-luxury" class="theme-btn px-4 py-2 rounded-full text-sm font-medium transition-all" style="background: rgba(201,168,76,0.2); color: #c9a84c; border: 1px solid #c9a84c;">✨ Sparkle</button> <button onclick="switchTheme('dark')" id="btn-dark" class="theme-btn px-4 py-2 rounded-full text-sm font-medium transition-all" style="background: rgba(180,30,30,0.2); color: #e05050; border: 1px solid #600;">🌙 Midnight</button> <button onclick="switchTheme('dreamy')" id="btn-dreamy" class="theme-btn px-4 py-2 rounded-full text-sm font-medium transition-all" style="background: rgba(167,139,250,0.2); color: #a78bfa; border: 1px solid rgba(167,139,250,0.4);">☁️ Dreamy</button>
+     </div>
+     <div id="variant-selector" class="flex gap-2 flex-wrap" style="display:none;">
+      <button onclick="switchVariant(1)" id="btn-variant-1" class="variant-btn px-3 py-2 rounded-full text-xs font-medium transition-all" style="background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3);">Style 1</button> <button onclick="switchVariant(2)" id="btn-variant-2" class="variant-btn px-3 py-2 rounded-full text-xs font-medium transition-all" style="background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.2);">Style 2</button>
+     </div>
+    </div>
+   </nav><!-- Template Container -->
+   <div id="template-container" class="w-full"></div>
+  </div>
+  <script>
+  // State
+  let currentTheme = 'cute';
+  let currentVariant = 1; // 1 or 2 for each theme
+  let uploadedImages = { img1: null, img2: null, img3: null, img4: null, img5: null, img6: null, img7: null, img8: null, img9: null, img10: null, video: null };
+
+  const defaultConfig = {
+    sender_name: 'Your Name',
+    recipient_name: 'My Love',
+    love_message: 'Write your heartfelt message here...',
+    page_subtitle: 'A letter written from the heart',
+    font_family: 'Playfair Display',
+    font_size: 16,
+    background_color: '#0f0f0f',
+    surface_color: '#1a1a2e',
+    text_color: '#ffffff',
+    primary_action_color: '#ff8fab',
+    secondary_action_color: '#c9a84c'
+  };
+
+  function getConfig() {
+    return window.elementSdk?.config || defaultConfig;
+  }
+
+  // SVG Hearts
+  function heartSVG(color, size = 24) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+  }
+
+  // Generate floating decorations
+  function generateDecorations(theme) {
+    let html = '';
+    if (theme === 'cute') {
+      for (let i = 0; i < 12; i++) {
+        const left = Math.random() * 100;
+        const delay = Math.random() * 4;
+        const size = 12 + Math.random() * 20;
+        const opacity = 0.15 + Math.random() * 0.25;
+        html += `<div class="float-heart" style="position:absolute;left:${left}%;bottom:${Math.random()*60}%;animation-delay:${delay}s;opacity:${opacity};pointer-events:none;">${heartSVG('#ff6b8a', size)}</div>`;
+      }
+    } else if (theme === 'dreamy') {
+      for (let i = 0; i < 20; i++) {
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const delay = Math.random() * 3;
+        const size = 3 + Math.random() * 5;
+        html += `<div class="sparkle" style="position:absolute;left:${left}%;top:${top}%;animation-delay:${delay}s;width:${size}px;height:${size}px;background:white;border-radius:50%;pointer-events:none;"></div>`;
+      }
+    }
+    return html;
+  }
+
+  // ===== CUTE TEMPLATES =====
+  function renderCuteTemplate1(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(180deg, #fff0f3 0%, #ffd6e0 30%, #ffb3c6 60%, #ff8fab 100%);overflow:hidden;font-family:'Quicksand',sans-serif;">
+      ${generateDecorations('cute')}
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:40px 20px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:32px;">
+          <div style="font-size:48px;margin-bottom:8px;">💕</div>
+          <h2 id="t-recipient" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*2.5}px;color:#d63384;margin:0;">To ${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <p id="t-subtitle" style="color:#c2185b;font-size:${(c.font_size||16)*0.9}px;margin-top:8px;opacity:0.8;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+          <div style="aspect-ratio:4/5;">
+            ${placeholderHTML('img1','image','#ff8fab88','#d63384','rgba(255,143,171,0.15)')}
+          </div>
+          <div style="aspect-ratio:4/5;">
+            ${placeholderHTML('img2','image','#ff8fab88','#d63384','rgba(255,143,171,0.15)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d3" style="background:rgba(255,255,255,0.7);backdrop-filter:blur(8px);border-radius:20px;padding:32px;margin-bottom:24px;border:1px solid rgba(255,143,171,0.3);">
+          <div style="text-align:center;margin-bottom:16px;">${heartSVG('#ff6b8a', 28)}</div>
+          <p id="t-message" style="font-family:'${c.font_family||defaultConfig.font_family}',serif;font-size:${(c.font_size||16)*1.1}px;color:#880e4f;line-height:1.8;text-align:center;margin:0;">${c.love_message || defaultConfig.love_message}</p>
+        </div>
+
+        <div class="fade-up fade-up-d4" style="aspect-ratio:16/9;margin-bottom:24px;">
+          ${placeholderHTML('video','video','#ff8fab88','#d63384','rgba(255,143,171,0.1)')}
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:center;padding:24px 0;">
+          <p style="color:#c2185b;font-size:${(c.font_size||16)*0.85}px;margin:0 0 4px;">With all my love,</p>
+          <h3 id="t-sender" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*2}px;color:#d63384;margin:0;">${c.sender_name || defaultConfig.sender_name}</h3>
+          <div style="margin-top:12px;font-size:20px;">🩷🩷🩷</div>
+        </div>
+
+        <div style="text-align:center;padding:16px 0;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:#ff6b8a;color:white;border:none;padding:12px 32px;border-radius:50px;font-size:14px;cursor:pointer;font-family:'Quicksand',sans-serif;font-weight:600;">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:16px;height:16px;"></i> Save Template</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderCuteTemplate2(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(135deg, #ffcceb 0%, #ffb3d9 25%, #ffa8d1 50%, #ff99c8 75%, #ff88bd 100%);overflow:hidden;font-family:'Quicksand',sans-serif;">
+      ${generateDecorations('cute')}
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:50px 24px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:40px;">
+          <div style="font-size:56px;margin-bottom:16px;">💖✨</div>
+          <h2 id="t-recipient" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*3}px;color:#fff;margin:0;text-shadow:2px 2px 4px rgba(0,0,0,0.1);">To ${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <p id="t-subtitle" style="color:rgba(255,255,255,0.9);font-size:${(c.font_size||16)*0.95}px;margin-top:12px;font-style:italic;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;">
+          <div style="aspect-ratio:1;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+            ${placeholderHTML('img1','image','#ffb3d988','#fff','rgba(255,255,255,0.2)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+            ${placeholderHTML('img2','image','#ffb3d988','#fff','rgba(255,255,255,0.2)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+            ${placeholderHTML('img3','image','#ffb3d988','#fff','rgba(255,255,255,0.2)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+            ${placeholderHTML('img4','image','#ffb3d988','#fff','rgba(255,255,255,0.2)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+            ${placeholderHTML('img5','image','#ffb3d988','#fff','rgba(255,255,255,0.2)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+            ${placeholderHTML('img6','image','#ffb3d988','#fff','rgba(255,255,255,0.2)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d3" style="aspect-ratio:16/9;margin-bottom:24px;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+          ${placeholderHTML('video','video','#ffb3d988','#fff','rgba(255,255,255,0.15)')}
+        </div>
+
+        <div class="fade-up fade-up-d4" style="background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border-radius:28px;padding:40px;margin-bottom:28px;border:2px solid rgba(255,255,255,0.5);box-shadow:0 8px 32px rgba(0,0,0,0.1);">
+          <p id="t-message" style="font-family:'${c.font_family||defaultConfig.font_family}',serif;font-size:${(c.font_size||16)*1.2}px;color:#d63384;line-height:2;text-align:center;margin:0;font-style:italic;">${c.love_message || defaultConfig.love_message}</p>
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:center;padding:32px 0;background:rgba(255,255,255,0.4);border-radius:20px;backdrop-filter:blur(8px);">
+          <p style="color:#d63384;font-size:${(c.font_size||16)*0.85}px;margin:0 0 8px;text-transform:uppercase;letter-spacing:2px;">Forever yours,</p>
+          <h3 id="t-sender" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*2.4}px;color:#d63384;margin:0;">${c.sender_name || defaultConfig.sender_name}</h3>
+        </div>
+
+        <div style="text-align:center;padding:20px 0;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:rgba(255,255,255,0.6);color:#d63384;border:2px solid rgba(255,255,255,0.8);padding:14px 36px;border-radius:50px;font-size:14px;cursor:pointer;font-family:'Quicksand',sans-serif;font-weight:700;backdrop-filter:blur(8px);">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:16px;height:16px;"></i> Save Template</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ===== LUXURY TEMPLATES =====
+  function renderLuxuryTemplate1(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(180deg, #1a0a2e 0%, #16213e 40%, #0f3460 100%);overflow:hidden;font-family:'Cinzel',serif;">
+      <div style="position:absolute;inset:12px;border:1px solid rgba(201,168,76,0.3);border-radius:4px;pointer-events:none;z-index:1;"></div>
+      <div style="position:absolute;inset:16px;border:1px solid rgba(201,168,76,0.15);border-radius:4px;pointer-events:none;z-index:1;"></div>
+
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:60px 32px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:48px;">
+          <div style="font-size:14px;letter-spacing:6px;color:#c9a84c;text-transform:uppercase;margin-bottom:16px;">✦ &nbsp; A Love Letter &nbsp; ✦</div>
+          <h2 id="t-recipient" class="gold-shimmer" style="font-family:'Playfair Display',serif;font-size:${(c.font_size||16)*2.8}px;margin:0;font-weight:700;">To ${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:20px auto;"></div>
+          <p id="t-subtitle" style="color:rgba(201,168,76,0.7);font-size:${(c.font_size||16)*0.85}px;font-style:italic;letter-spacing:2px;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;">
+          <div style="aspect-ratio:3/4;border:1px solid rgba(201,168,76,0.25);padding:6px;border-radius:4px;">
+            ${placeholderHTML('img1','image','rgba(201,168,76,0.4)','#c9a84c','rgba(201,168,76,0.05)')}
+          </div>
+          <div style="aspect-ratio:3/4;border:1px solid rgba(201,168,76,0.25);padding:6px;border-radius:4px;">
+            ${placeholderHTML('img2','image','rgba(201,168,76,0.4)','#c9a84c','rgba(201,168,76,0.05)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d3" style="position:relative;margin-bottom:40px;padding:40px;border:1px solid rgba(201,168,76,0.2);border-radius:4px;">
+          <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#16213e;padding:0 16px;color:#c9a84c;font-size:20px;">❧</div>
+          <p id="t-message" style="font-family:'${(c.font_family||defaultConfig.font_family)}',serif;font-size:${(c.font_size||16)*1.15}px;color:#e8d5b5;line-height:2;text-align:center;margin:0;font-style:italic;">"${c.love_message || defaultConfig.love_message}"</p>
+        </div>
+
+        <div class="fade-up fade-up-d4" style="aspect-ratio:16/9;margin-bottom:40px;border:1px solid rgba(201,168,76,0.2);padding:6px;border-radius:4px;">
+          ${placeholderHTML('video','video','rgba(201,168,76,0.3)','#c9a84c','rgba(201,168,76,0.03)')}
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:center;padding:32px 0;">
+          <p style="color:rgba(201,168,76,0.6);font-size:${(c.font_size||16)*0.8}px;letter-spacing:3px;text-transform:uppercase;margin:0 0 8px;">Forever Yours,</p>
+          <h3 id="t-sender" class="gold-shimmer" style="font-family:'Playfair Display',serif;font-size:${(c.font_size||16)*2.2}px;margin:0;">${c.sender_name || defaultConfig.sender_name}</h3>
+          <div style="width:40px;height:1px;background:#c9a84c;margin:20px auto;"></div>
+        </div>
+
+        <div style="text-align:center;padding:16px 0;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:transparent;color:#c9a84c;border:1px solid #c9a84c;padding:12px 40px;border-radius:2px;font-size:13px;cursor:pointer;font-family:'Cinzel',serif;letter-spacing:3px;text-transform:uppercase;">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:14px;height:14px;"></i> Save</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderLuxuryTemplate2(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(180deg, #0d0620 0%, #1a0f2e 30%, #2a1a4a 60%, #1a0f2e 100%);overflow:hidden;font-family:'Cinzel',serif;">
+      <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%, rgba(201,168,76,0.08) 0%, transparent 50%);pointer-events:none;"></div>
+
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:70px 40px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:50px;">
+          <div style="font-size:48px;margin-bottom:24px;">💍</div>
+          <h2 id="t-recipient" style="font-family:'Playfair Display',serif;font-size:${(c.font_size||16)*3.2}px;color:#f5e6a3;margin:0;font-weight:700;letter-spacing:1px;">To ${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <div style="width:100px;height:2px;background:linear-gradient(90deg,transparent,#c9a84c,#f5e6a3,#c9a84c,transparent);margin:28px auto;"></div>
+          <p id="t-subtitle" style="color:#c9a84c;font-size:${(c.font_size||16)*0.9}px;letter-spacing:3px;text-transform:uppercase;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="aspect-ratio:9/11;margin:0 auto 40px;width:260px;border:2px solid #c9a84c;border-radius:8px;padding:8px;background:linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(245,230,163,0.05) 100%);overflow:hidden;">
+          ${placeholderHTML('img1','image','rgba(201,168,76,0.5)','#c9a84c','rgba(201,168,76,0.08)')}
+        </div>
+
+        <div class="fade-up fade-up-d3" style="margin-bottom:40px;padding:48px 36px;border:2px solid rgba(201,168,76,0.3);border-radius:8px;background:linear-gradient(135deg, rgba(201,168,76,0.05) 0%, rgba(245,230,163,0.02) 100%);position:relative;">
+          <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg, #0d0620, #1a0f2e);padding:0 20px;color:#f5e6a3;font-size:24px;">✦</div>
+          <p id="t-message" style="font-family:'${c.font_family||defaultConfig.font_family}',serif;font-size:${(c.font_size||16)*1.2}px;color:#e8d5b5;line-height:2.2;text-align:center;margin:0;">${c.love_message || defaultConfig.love_message}</p>
+        </div>
+
+        <div class="fade-up fade-up-d4" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;">
+          <div style="aspect-ratio:1;border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:4px;overflow:hidden;">
+            ${placeholderHTML('img2','image','rgba(201,168,76,0.3)','#c9a84c','rgba(201,168,76,0.05)')}
+          </div>
+          <div style="aspect-ratio:1;border:1px solid rgba(201,168,76,0.25);border-radius:8px;padding:4px;overflow:hidden;">
+            ${placeholderHTML('video','video','rgba(201,168,76,0.3)','#c9a84c','rgba(201,168,76,0.05)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:center;padding:40px 0;border-top:1px solid rgba(201,168,76,0.2);border-bottom:1px solid rgba(201,168,76,0.2);">
+          <p style="color:#c9a84c;font-size:${(c.font_size||16)*0.8}px;letter-spacing:4px;text-transform:uppercase;margin:0 0 12px;">With eternal devotion,</p>
+          <h3 id="t-sender" style="font-family:'Playfair Display',serif;font-size:${(c.font_size||16)*2.4}px;color:#f5e6a3;margin:0;">${c.sender_name || defaultConfig.sender_name}</h3>
+        </div>
+
+        <div style="text-align:center;padding:24px 0;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:rgba(201,168,76,0.15);color:#c9a84c;border:2px solid #c9a84c;padding:14px 48px;border-radius:4px;font-size:13px;cursor:pointer;font-family:'Cinzel',serif;letter-spacing:3px;text-transform:uppercase;">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:14px;height:14px;"></i> Save</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ===== DARK TEMPLATES =====
+  function renderDarkTemplate1(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(180deg, #0a0a0a 0%, #1a0000 30%, #0d0d0d 60%, #0a0a0a 100%);overflow:hidden;font-family:'Playfair Display',serif;">
+      <div style="position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(180,30,30,0.15) 0%,transparent 70%);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:30%;right:10%;width:300px;height:300px;background:radial-gradient(circle,rgba(120,20,20,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:60px 24px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:48px;">
+          <div style="width:40px;height:2px;background:#8b0000;margin:0 auto 20px;"></div>
+          <h2 id="t-recipient" style="font-size:${(c.font_size||16)*3}px;color:#e8e8e8;margin:0;font-weight:400;letter-spacing:2px;">To ${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <p id="t-subtitle" style="color:#8b0000;font-size:${(c.font_size||16)*0.85}px;margin-top:12px;font-style:italic;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+          <div style="width:40px;height:2px;background:#8b0000;margin:20px auto 0;"></div>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="margin-bottom:32px;">
+          <div class="glow-pulse" style="aspect-ratio:21/9;border-radius:4px;overflow:hidden;border:1px solid rgba(139,0,0,0.3);">
+            ${placeholderHTML('img1','image','rgba(139,0,0,0.5)','#cc3333','rgba(139,0,0,0.08)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d3" style="margin-bottom:32px;padding:40px 32px;position:relative;">
+          <div style="position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,#8b0000,transparent);"></div>
+          <p id="t-message" style="font-family:'${c.font_family||defaultConfig.font_family}',serif;font-size:${(c.font_size||16)*1.2}px;color:#ccc;line-height:2;margin:0;padding-left:24px;">${c.love_message || defaultConfig.love_message}</p>
+        </div>
+
+        <div class="fade-up fade-up-d4" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+          <div style="aspect-ratio:1;border:1px solid rgba(139,0,0,0.2);border-radius:4px;overflow:hidden;">
+            ${placeholderHTML('img2','image','rgba(139,0,0,0.4)','#cc3333','rgba(139,0,0,0.05)')}
+          </div>
+          <div style="aspect-ratio:1;border:1px solid rgba(139,0,0,0.2);border-radius:4px;overflow:hidden;">
+            ${placeholderHTML('video','video','rgba(139,0,0,0.4)','#cc3333','rgba(139,0,0,0.05)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:right;padding:40px 0;">
+          <p style="color:#666;font-size:${(c.font_size||16)*0.8}px;margin:0 0 4px;text-transform:uppercase;letter-spacing:4px;">Eternally,</p>
+          <h3 id="t-sender" style="font-size:${(c.font_size||16)*2}px;color:#e8e8e8;margin:0;font-weight:400;">${c.sender_name || defaultConfig.sender_name}</h3>
+          <div style="width:60px;height:1px;background:#8b0000;margin:16px 0 0 auto;"></div>
+        </div>
+
+        <div style="text-align:center;padding:16px 0;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:rgba(139,0,0,0.3);color:#cc3333;border:1px solid rgba(139,0,0,0.5);padding:12px 36px;border-radius:2px;font-size:13px;cursor:pointer;font-family:'Playfair Display',serif;letter-spacing:2px;">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:14px;height:14px;"></i> Save Template</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderDarkTemplate2(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(135deg, #000000 0%, #1a0a0a 25%, #0f0000 50%, #1a0a0a 75%, #000000 100%);overflow:hidden;font-family:'Playfair Display',serif;">
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 0%, rgba(200,40,40,0.2) 0%, transparent 60%);pointer-events:none;"></div>
+
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:70px 32px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:50px;">
+          <div style="font-size:52px;margin-bottom:24px;">🔥</div>
+          <h2 id="t-recipient" style="font-size:${(c.font_size||16)*3.4}px;color:#ff9999;margin:0;font-weight:300;letter-spacing:3px;text-transform:uppercase;">To ${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <div style="width:80px;height:2px;background:linear-gradient(90deg,transparent,#cc3333,#8b0000,transparent);margin:28px auto;"></div>
+          <p id="t-subtitle" style="color:#8b0000;font-size:${(c.font_size||16)*0.9}px;letter-spacing:2px;font-style:italic;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:40px;">
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img1','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img2','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img3','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img4','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img5','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img6','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img7','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img8','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img9','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+          <div style="aspect-ratio:2/3;border:1px solid rgba(200,40,40,0.4);border-radius:2px;overflow:hidden;box-shadow:inset 0 0 20px rgba(200,40,40,0.1);">
+            ${placeholderHTML('img10','image','rgba(200,40,40,0.5)','#cc3333','rgba(200,40,40,0.08)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d3" style="margin-bottom:40px;padding:48px 40px;border:1px solid rgba(139,0,0,0.3);border-left:4px solid #cc3333;background:linear-gradient(90deg, rgba(200,40,40,0.05) 0%, transparent 100%);">
+          <p id="t-message" style="font-family:'${c.font_family||defaultConfig.font_family}',serif;font-size:${(c.font_size||16)*1.25}px;color:#ddd;line-height:2.2;text-align:center;margin:0;">${c.love_message || defaultConfig.love_message}</p>
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:left;padding:40px 0;padding-left:24px;border-left:3px solid #cc3333;">
+          <p style="color:#666;font-size:${(c.font_size||16)*0.8}px;margin:0 0 8px;text-transform:uppercase;letter-spacing:3px;">Your devoted,</p>
+          <h3 id="t-sender" style="font-size:${(c.font_size||16)*2.6}px;color:#ff9999;margin:0;font-weight:300;">${c.sender_name || defaultConfig.sender_name}</h3>
+        </div>
+
+        <div style="text-align:center;padding:24px 0;margin-top:24px;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:rgba(200,40,40,0.2);color:#ff9999;border:2px solid rgba(200,40,40,0.5);padding:14px 40px;border-radius:2px;font-size:13px;cursor:pointer;font-family:'Playfair Display',serif;letter-spacing:2px;text-transform:uppercase;">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:14px;height:14px;"></i> Save Template</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ===== DREAMY TEMPLATES =====
+  function renderDreamyTemplate1(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(180deg, #e0c3fc 0%, #c7ceea 25%, #a0c4ff 50%, #bdb2ff 75%, #ffc6ff 100%);overflow:hidden;font-family:'Quicksand',sans-serif;">
+      ${generateDecorations('dreamy')}
+      <div class="cloud-drift" style="position:absolute;top:8%;left:5%;width:200px;height:80px;background:rgba(255,255,255,0.35);border-radius:50%;filter:blur(20px);pointer-events:none;"></div>
+      <div class="cloud-drift" style="position:absolute;top:35%;right:5%;width:250px;height:90px;background:rgba(255,255,255,0.25);border-radius:50%;filter:blur(25px);pointer-events:none;animation-delay:3s;"></div>
+      <div class="cloud-drift" style="position:absolute;bottom:15%;left:15%;width:180px;height:70px;background:rgba(255,255,255,0.3);border-radius:50%;filter:blur(18px);pointer-events:none;animation-delay:5s;"></div>
+
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:48px 24px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:40px;">
+          <div style="font-size:36px;margin-bottom:8px;">☁️</div>
+          <h2 id="t-recipient" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*2.8}px;color:#4a2478;margin:0;">To ${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <p id="t-subtitle" style="color:#6b4c8a;font-size:${(c.font_size||16)*0.9}px;margin-top:10px;opacity:0.8;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;">
+          <div style="aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 8px 32px rgba(167,139,250,0.3);">
+            ${placeholderHTML('img1','image','rgba(167,139,250,0.4)','#7c3aed','rgba(255,255,255,0.25)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 8px 32px rgba(255,198,255,0.3);">
+            ${placeholderHTML('img2','image','rgba(255,198,255,0.5)','#a855f7','rgba(255,255,255,0.25)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d3" style="background:rgba(255,255,255,0.45);backdrop-filter:blur(12px);border-radius:24px;padding:36px;margin-bottom:32px;box-shadow:0 8px 32px rgba(167,139,250,0.15);">
+          <p id="t-message" style="font-family:'${c.font_family||defaultConfig.font_family}',serif;font-size:${(c.font_size||16)*1.1}px;color:#3b1f5e;line-height:1.9;text-align:center;margin:0;">${c.love_message || defaultConfig.love_message}</p>
+        </div>
+
+        <div class="fade-up fade-up-d4" style="aspect-ratio:16/9;margin-bottom:32px;border-radius:20px;overflow:hidden;box-shadow:0 8px 32px rgba(167,139,250,0.2);">
+          ${placeholderHTML('video','video','rgba(167,139,250,0.3)','#7c3aed','rgba(255,255,255,0.2)')}
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:center;padding:28px 0;">
+          <p style="color:#6b4c8a;font-size:${(c.font_size||16)*0.85}px;margin:0 0 6px;">Dreaming of you always,</p>
+          <h3 id="t-sender" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*2.2}px;color:#4a2478;margin:0;">${c.sender_name || defaultConfig.sender_name}</h3>
+          <div style="margin-top:12px;font-size:18px;">✨💜✨</div>
+        </div>
+
+        <div style="text-align:center;padding:16px 0;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:rgba(124,58,237,0.2);color:#7c3aed;border:1px solid rgba(124,58,237,0.4);padding:12px 32px;border-radius:50px;font-size:14px;cursor:pointer;font-family:'Quicksand',sans-serif;font-weight:600;backdrop-filter:blur(8px);">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:16px;height:16px;"></i> Save Template</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderDreamyTemplate2(c) {
+    return `
+    <div id="template-content" style="position:relative;min-height:100%;background:linear-gradient(135deg, #ffd6f3 0%, #e0b6f7 20%, #c4a8ff 40%, #a8d5ff 60%, #b8e6ff 80%, #ffcff0 100%);overflow:hidden;font-family:'Quicksand',sans-serif;">
+      ${generateDecorations('dreamy')}
+      <div style="position:absolute;top:15%;right:10%;width:180px;height:180px;background:radial-gradient(circle,rgba(255,255,255,0.3) 0%,transparent 70%);border-radius:50%;filter:blur(30px);pointer-events:none;"></div>
+      <div style="position:absolute;bottom:20%;left:5%;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,0.25) 0%,transparent 70%);border-radius:50%;filter:blur(35px);pointer-events:none;"></div>
+
+      <div style="position:relative;z-index:2;max-width:720px;margin:0 auto;padding:56px 28px;">
+        <div class="fade-up fade-up-d1" style="text-align:center;margin-bottom:48px;">
+          <div style="font-size:64px;margin-bottom:16px;">✨</div>
+          <h2 id="t-recipient" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*3.2}px;color:#5a2d82;margin:0;">${c.recipient_name || defaultConfig.recipient_name}</h2>
+          <p id="t-subtitle" style="color:#7c4a9e;font-size:${(c.font_size||16)*1}px;margin-top:12px;font-style:italic;font-weight:300;">${c.page_subtitle || defaultConfig.page_subtitle}</p>
+        </div>
+
+        <div class="fade-up fade-up-d2" style="aspect-ratio:9/11;margin:0 auto 36px;width:240px;border-radius:40px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.15);border:4px solid rgba(255,255,255,0.5);">
+          ${placeholderHTML('img1','image','rgba(200,150,255,0.4)','#8b5fb8','rgba(255,255,255,0.3)')}
+        </div>
+
+        <div class="fade-up fade-up-d3" style="background:rgba(255,255,255,0.6);backdrop-filter:blur(16px);border-radius:32px;padding:44px;margin-bottom:36px;box-shadow:0 12px 48px rgba(0,0,0,0.1);border:2px solid rgba(255,255,255,0.7);">
+          <p id="t-message" style="font-family:'${c.font_family||defaultConfig.font_family}',serif;font-size:${(c.font_size||16)*1.25}px;color:#5a2d82;line-height:2.1;text-align:center;margin:0;">${c.love_message || defaultConfig.love_message}</p>
+        </div>
+
+        <div class="fade-up fade-up-d4" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:40px;">
+          <div style="aspect-ratio:1;border-radius:30px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.12);border:3px solid rgba(255,255,255,0.4);">
+            ${placeholderHTML('img1','image','rgba(200,150,255,0.3)','#8b5fb8','rgba(255,255,255,0.25)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:30px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.12);border:3px solid rgba(255,255,255,0.4);">
+            ${placeholderHTML('video','video','rgba(200,150,255,0.3)','#8b5fb8','rgba(255,255,255,0.25)')}
+          </div>
+          <div style="aspect-ratio:1;border-radius:30px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.12);border:3px solid rgba(255,255,255,0.4);">
+            ${placeholderHTML('img2','image','rgba(200,150,255,0.3)','#8b5fb8','rgba(255,255,255,0.25)')}
+          </div>
+        </div>
+
+        <div class="fade-up fade-up-d5" style="text-align:center;padding:36px;background:rgba(255,255,255,0.5);border-radius:28px;backdrop-filter:blur(12px);border:2px solid rgba(255,255,255,0.6);">
+          <p style="color:#7c4a9e;font-size:${(c.font_size||16)*0.9}px;margin:0 0 8px;font-weight:300;letter-spacing:1px;">With all my love &amp; dreams,</p>
+          <h3 id="t-sender" style="font-family:'Dancing Script',cursive;font-size:${(c.font_size||16)*2.6}px;color:#5a2d82;margin:0;">${c.sender_name || defaultConfig.sender_name}</h3>
+        </div>
+
+        <div style="text-align:center;padding:24px 0;">
+          <button onclick="downloadTemplate()" class="download-btn" style="background:rgba(200,150,255,0.25);color:#6b4a9e;border:2px solid rgba(200,150,255,0.5);padding:14px 40px;border-radius:50px;font-size:14px;cursor:pointer;font-family:'Quicksand',sans-serif;font-weight:700;backdrop-filter:blur(10px);">
+            <span style="display:inline-flex;align-items:center;gap:8px;"><i data-lucide="download" style="width:16px;height:16px;"></i> Save Template</span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+  }
+  // Placeholder HTML
+  function placeholderHTML(id, type, borderColor, textColor, bgColor) {
+    const icon = type === 'video' ? 'video' : 'image';
+    const label = type === 'video' ? 'Upload Video' : 'Upload Image';
+    const uploaded = uploadedImages[id];
+    let innerContent = '';
+    if (uploaded) {
+      if (type === 'video') {
+        innerContent = `<video src="${uploaded}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" autoplay muted loop playsinline></video>`;
+      } else {
+        innerContent = `<img src="${uploaded}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" alt="Uploaded" loading="lazy" onerror="console.error('Image failed:', this.src); this.style.background='${bgColor}';">`;
+      }
+    } else {
+      innerContent = `<i data-lucide="${icon}" style="width:32px;height:32px;color:${textColor};opacity:0.6;"></i><span style="color:${textColor};opacity:0.6;font-size:13px;">${label}</span>`;
+    }
+    const accept = type === 'video' ? 'video/*' : 'image/*';
+    return `<div class="placeholder-zone" style="border-color:${borderColor};background:${bgColor};">${innerContent}<input type="file" accept="${accept}" onchange="handleUpload(event,'${id}','${type}')"></div>`;
+  }
+
+  function handleUpload(e, id, type) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    uploadedImages[id] = url;
+    renderTemplate();
+  }
+
+  // Download functionality
+  function downloadTemplate() {
+    const container = document.getElementById('template-content');
+    if (!container) return;
+    const notification = document.createElement('div');
+    notification.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:8px;z-index:9999;font-size:14px;';
+    notification.textContent = '💡 Tip: Use your browser\'s screenshot tool or right-click → Save to capture this template!';
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 4000);
+  }
+
+  function renderTemplate() {
+    const c = getConfig();
+    const container = document.getElementById('template-container');
+    let html = '';
+    switch(currentTheme) {
+      case 'cute': 
+        html = currentVariant === 1 ? renderCuteTemplate1(c) : renderCuteTemplate2(c);
+        break;
+      case 'luxury': 
+        html = currentVariant === 1 ? renderLuxuryTemplate1(c) : renderLuxuryTemplate2(c);
+        break;
+      case 'dark': 
+        html = currentVariant === 1 ? renderDarkTemplate1(c) : renderDarkTemplate2(c);
+        break;
+      case 'dreamy': 
+        html = currentVariant === 1 ? renderDreamyTemplate1(c) : renderDreamyTemplate2(c);
+        break;
+    }
+    container.innerHTML = html;
+
+    // Style placeholders to fill
+    container.querySelectorAll('.placeholder-zone').forEach(el => {
+      el.style.width = '100%';
+      el.style.height = '100%';
+    });
+
+    lucide.createIcons();
+    updateActiveButton();
+  }
+
+  function updateActiveButton() {
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.style.opacity = '0.6';
+      btn.style.transform = 'scale(1)';
+    });
+    const active = document.getElementById('btn-' + currentTheme);
+    if (active) {
+      active.style.opacity = '1';
+      active.style.transform = 'scale(1.05)';
+    }
+
+    // Update variant buttons
+    document.querySelectorAll('.variant-btn').forEach((btn, i) => {
+      const variant = i + 1;
+      if (variant === currentVariant) {
+        btn.style.background = 'rgba(255,255,255,0.3)';
+        btn.style.color = '#fff';
+        btn.style.borderColor = 'rgba(255,255,255,0.5)';
+      } else {
+        btn.style.background = 'rgba(255,255,255,0.1)';
+        btn.style.color = 'rgba(255,255,255,0.6)';
+        btn.style.borderColor = 'rgba(255,255,255,0.2)';
+      }
+    });
+  }
+
+  function switchTheme(theme) {
+    currentTheme = theme;
+    currentVariant = 1;
+    document.getElementById('variant-selector').style.display = 'flex';
+    renderTemplate();
+  }
+
+  function switchVariant(variant) {
+    currentVariant = variant;
+    renderTemplate();
+  }
+
+  // Create edit panel handlers
+  const editPanelHandlers = {
+    sender_name: (value) => {
+      window.elementSdk.setConfig({ sender_name: value });
+    },
+    recipient_name: (value) => {
+      window.elementSdk.setConfig({ recipient_name: value });
+    },
+    love_message: (value) => {
+      window.elementSdk.setConfig({ love_message: value });
+    },
+    page_subtitle: (value) => {
+      window.elementSdk.setConfig({ page_subtitle: value });
+    }
+  };
+
+  // Element SDK
+  window.elementSdk.init({
+    defaultConfig,
+    onConfigChange: async (config) => {
+      renderTemplate();
+    },
+    mapToCapabilities: (config) => ({
+      recolorables: [
+        { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); }},
+        { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); }},
+        { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); }},
+        { get: () => config.primary_action_color || defaultConfig.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); }},
+        { get: () => config.secondary_action_color || defaultConfig.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); }}
+      ],
+      borderables: [],
+      fontEditable: {
+        get: () => config.font_family || defaultConfig.font_family,
+        set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+      },
+      fontSizeable: {
+        get: () => config.font_size || defaultConfig.font_size,
+        set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+      }
+    }),
+    mapToEditPanelValues: (config) => new Map([
+      ['sender_name', config.sender_name || defaultConfig.sender_name],
+      ['recipient_name', config.recipient_name || defaultConfig.recipient_name],
+      ['love_message', config.love_message || defaultConfig.love_message],
+      ['page_subtitle', config.page_subtitle || defaultConfig.page_subtitle]
+    ])
+  });
+
+  // Listen for edit panel changes and update config
+  if (window.editPanelSdk) {
+    window.editPanelSdk.addValueChangeListener((key, value) => {
+      if (editPanelHandlers[key]) {
+        editPanelHandlers[key](value);
+      }
+    });
+  }
+
+  renderTemplate();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e1d0aa174479e77',t:'MTc3NDQzMjU0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
